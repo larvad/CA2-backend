@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import dtos.ComboDTO;
 import dtos.PokemonDTO;
 import dtos.RandomFactDTO;
+import entities.Event;
 import entities.User;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ import utils.PokemonFetcher;
  * @author lam@cphbusiness.dk
  */
 @Path("info")
-@DeclareRoles({"user", "admin"})
+@DeclareRoles({"user", "admin", "gusmester"})
 public class DemoResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
@@ -71,6 +72,20 @@ public class DemoResource {
         } finally {
             em.close();
         }
+    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("events")
+    public String allEvents() {
+        EntityManager em = EMF.createEntityManager();
+        try {
+            TypedQuery<Event> query = em.createQuery("select e from Event e", Event.class);
+            List<Event> events = query.getResultList();
+            return GSON.toJson(events);
+        } finally {
+            em.close();
+        }
+
     }
 
     @GET
@@ -187,5 +202,17 @@ public class DemoResource {
 //            }
 
     }
+
+    public String addUserToEvent(String inputJSON) {
+
+        JsonObject json = JsonParser.parseString(inputJSON).getAsJsonObject();
+        String seats = json.get("seats").getAsString();
+        String username = json.get("username").getAsString();
+        String eventId = json.get("eventId").getAsString();
+
+    }
+
+
+
 
 }
