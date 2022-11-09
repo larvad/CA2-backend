@@ -203,14 +203,14 @@ public class DemoResource {
 
     }
 
-    public String addUserToEvent(String inputJSON) {
-
-        JsonObject json = JsonParser.parseString(inputJSON).getAsJsonObject();
-        String seats = json.get("seats").getAsString();
-        String username = json.get("username").getAsString();
-        String eventId = json.get("eventId").getAsString();
-
-    }
+//    public String addUserToEvent(String inputJSON) {
+//
+//        JsonObject json = JsonParser.parseString(inputJSON).getAsJsonObject();
+//        String seats = json.get("seats").getAsString();
+//        String username = json.get("username").getAsString();
+//        String eventId = json.get("eventId").getAsString();
+//
+//    }
 
 
 
