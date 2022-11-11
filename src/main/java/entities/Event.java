@@ -50,4 +50,10 @@ public class Event {
         this.price = price;
         this.seats = seats;
     }
+
+    public void addUserToEvent(User userName) {
+        userList.add(userName);
+    }
+
+}
 }

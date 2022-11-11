@@ -203,14 +203,21 @@ public class DemoResource {
 
     }
 
-//    public String addUserToEvent(String inputJSON) {
-//
-//        JsonObject json = JsonParser.parseString(inputJSON).getAsJsonObject();
-//        String seats = json.get("seats").getAsString();
-//        String username = json.get("username").getAsString();
-//        String eventId = json.get("eventId").getAsString();
-//
-//    }
+
+
+    @POST
+    @Path("booking")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Boolean addUserToEvent(String inputJSON) {
+
+        JsonObject json = JsonParser.parseString(inputJSON).getAsJsonObject();
+        String username = json.get("username").getAsString();
+        String eventId = json.get("eventId").getAsString();
+        boolean trueOrFalse = FACADE.userToEvent(eventId, username);
+        return trueOrFalse;
+
+    }
 
 
 

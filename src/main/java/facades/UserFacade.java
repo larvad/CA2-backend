@@ -1,5 +1,6 @@
 package facades;
 
+import entities.Event;
 import entities.Role;
 import entities.User;
 
@@ -84,5 +85,17 @@ public class UserFacade {
         em.persist(user);
         em.getTransaction().commit();
         return createdUser;
+    }
+
+    public boolean userToEvent(String eventId, String username) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        User user = em.find(User.class, username);
+        Event event = em.find(Event.class, eventId);
+        event.addUser(user);
+        em.merge(user);
+        em.merge(event);
+        em.getTransaction().commit();
+        return true;
     }
 }

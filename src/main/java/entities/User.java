@@ -102,4 +102,5 @@ public class  User implements Serializable {
     roleList.add(userRole);
   }
 
+
 }
