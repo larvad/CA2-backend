@@ -96,9 +96,10 @@ public class UserFacade {
         while (loopSeats > 0) {
             loopSeats--;
             event.addUser(user);
+            em.merge(user);
+            em.merge(event);
         }
-        em.merge(user);
-        em.merge(event);
+
         em.getTransaction().commit();
         return true;
     }
