@@ -11,18 +11,18 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "eventName", nullable = false)
+    @Column (name ="eventName", nullable = false)
     private String name;
-    @Column(name = "eventLocation", nullable = false)
+    @Column (name ="eventLocation", nullable = false)
     private String location;
-    @Column(name = "eventGusmester", nullable = false)
+    @Column (name ="eventGusmester", nullable = false)
     private String gusmester;
-    @Column(name = "eventPrice", nullable = false)
+    @Column (name ="eventPrice", nullable = false)
     private Double price;
-    @Column(name = "eventSeats", nullable = false)
+    @Column (name ="eventSeats", nullable = false)
     private Integer seats;
 
-    @JoinTable(name = "user_event", joinColumns = {
+    @JoinTable (name = "user_event", joinColumns = {
             @JoinColumn(name = "eventId", referencedColumnName = "id")}, inverseJoinColumns = {
             @JoinColumn(name = "user_name", referencedColumnName = "user_name")})
     @ManyToMany
@@ -41,9 +41,7 @@ public class Event {
         this.userList.add(user);
         user.getEventList().add(this);
     }
-
-    public Event() {
-    }
+    public Event(){}
 
     public Event(String name, String location, String gusmester, Double price, Integer seats) {
         this.name = name;
@@ -52,6 +50,7 @@ public class Event {
         this.price = price;
         this.seats = seats;
     }
+
 
 
 }

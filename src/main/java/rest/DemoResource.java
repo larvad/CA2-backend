@@ -215,7 +215,7 @@ public class DemoResource {
         String username = json.get("username").getAsString();
         String eventId = json.get("eventId").getAsString();
         String seats = json.get("seats").getAsString();
-        boolean trueOrFalse = FACADE.userToEvent(eventId, username, seats);
+        boolean trueOrFalse = FACADE.userToEvent(eventId, username);
         return trueOrFalse;
 
     }
