@@ -91,7 +91,7 @@ public class UserFacade {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         User user = em.find(User.class, username);
-        Event event = em.find(Event.class, eventId);
+        Event event = em.find(Event.class, Integer.parseInt(eventId));
         event.addUser(user);
         em.merge(user);
         em.merge(event);
