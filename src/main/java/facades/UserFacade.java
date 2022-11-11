@@ -87,12 +87,16 @@ public class UserFacade {
         return createdUser;
     }
 
-    public boolean userToEvent(String eventId, String username) {
+    public boolean userToEvent(String eventId, String username, String seats) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         User user = em.find(User.class, username);
         Event event = em.find(Event.class, Integer.parseInt(eventId));
-        event.addUser(user);
+        Integer loopSeats = Integer.parseInt(seats);
+        while (loopSeats > 0) {
+            loopSeats--;
+            event.addUser(user);
+        }
         em.merge(user);
         em.merge(event);
         em.getTransaction().commit();

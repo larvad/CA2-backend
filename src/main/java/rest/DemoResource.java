@@ -214,7 +214,8 @@ public class DemoResource {
         JsonObject json = JsonParser.parseString(inputJSON).getAsJsonObject();
         String username = json.get("username").getAsString();
         String eventId = json.get("eventId").getAsString();
-        boolean trueOrFalse = FACADE.userToEvent(eventId, username);
+        String seats = json.get("seats").getAsString();
+        boolean trueOrFalse = FACADE.userToEvent(eventId, username, seats);
         return trueOrFalse;
 
     }
