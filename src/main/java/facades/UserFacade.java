@@ -93,12 +93,9 @@ public class UserFacade {
         User user = em.find(User.class, username);
         Event event = em.find(Event.class, Integer.parseInt(eventId));
         Integer loopSeats = Integer.parseInt(seats);
-        while (loopSeats > 0) {
-            loopSeats = loopSeats -1;
-            event.addUser(user);
-            em.merge(user);
-            em.merge(event);
-        }
+        event.addUser(user);
+        em.merge(user);
+        em.merge(event);
 
         em.getTransaction().commit();
         return true;
