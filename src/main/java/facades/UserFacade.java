@@ -1,5 +1,6 @@
 package facades;
 
+import entities.Booking;
 import entities.Event;
 import entities.Role;
 import entities.User;
@@ -87,15 +88,36 @@ public class UserFacade {
         return createdUser;
     }
 
-    public boolean userToEvent(String eventId, String username) {
+    public Integer userToEvent(String eventId, String username, String seats) {
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
+            User user = em.find(User.class, username);
+            Event event = em.find(Event.class, Integer.parseInt(eventId));
+            Integer seatsInDb = event.getSeats();
+            Integer seatsAmount = Integer.parseInt(seats);
+
+
+            if (seatsAmount <= seatsInDb) {
+                Integer seatsToRemove = seatsAmount;
+                while (seatsAmount > 0) {
+                    seatsAmount--;
+                    Booking booking = new Booking(user, event);
+                    em.persist(booking);
+                }
+                event.setSeats(seatsInDb - seatsToRemove);
+                em.merge(event);
+                em.getTransaction().commit();
+                return 1;
+            }
+
+        return 2;
+    }
+
+    public User findUser(String username) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         User user = em.find(User.class, username);
-        Event event = em.find(Event.class, Integer.parseInt(eventId));
-        event.addUser(user);
-        em.merge(user);
-        em.merge(event);
-        em.getTransaction().commit();
-        return true;
+        return user;
+
     }
 }
