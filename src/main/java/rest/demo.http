@@ -44,7 +44,7 @@ GET http://localhost:8080/quickstart_war_exploded/api/info/myBookings
 Content-Type: application/json
 
 {
-  "username": "seb"
+  "username": "test"
 }
 
 

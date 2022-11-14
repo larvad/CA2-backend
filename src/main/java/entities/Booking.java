@@ -39,6 +39,7 @@ public class Booking implements Serializable {
         this.user = user;
         user.getBookings().add(this);
     }
+
     public void setEvent (Event event) {
         this.event = event;
         event.getBookings().add(this);
@@ -50,3 +51,4 @@ public class Booking implements Serializable {
         this.event = event;
     }
 }
+

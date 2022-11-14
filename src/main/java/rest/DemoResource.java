@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dtos.ComboDTO;
+import dtos.EventDto;
 import dtos.PokemonDTO;
 import dtos.RandomFactDTO;
 import entities.Event;
@@ -28,10 +29,10 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 
+import entities.UserDto;
 import facades.UserFacade;
 import utils.EMF_Creator;
 import utils.FactFetcher;
-import utils.HttpUtils;
 import utils.PokemonFetcher;
 
 
@@ -81,7 +82,12 @@ public class DemoResource {
         try {
             TypedQuery<Event> query = em.createQuery("select e from Event e", Event.class);
             List<Event> events = query.getResultList();
-            return GSON.toJson(events);
+            List<EventDto> eventDtos = new ArrayList<>();
+            for (Event event : events) {
+                eventDtos.add(new EventDto(event));
+            }
+
+            return GSON.toJson(eventDtos);
         } finally {
             em.close();
         }
@@ -230,9 +236,14 @@ public class DemoResource {
         JsonObject json = JsonParser.parseString(inputJSON).getAsJsonObject();
         String username = json.get("username").getAsString();
 
-        User user = FACADE.findUser(username);
-
-        return GSON.toJson(user);
+        EntityManager em = EMF.createEntityManager();
+        try {
+            TypedQuery<UserDto> query = em.createQuery("select e from User e", UserDto.class);
+            List<UserDto> userDto = query.getResultList();
+            return GSON.toJson(userDto);
+        } finally {
+            em.close();
+        }
 
     }
 }

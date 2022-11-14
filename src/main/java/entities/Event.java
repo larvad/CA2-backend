@@ -57,6 +57,15 @@ public class Event implements Serializable  {
     public Event() {
     }
 
+    public Event(Integer id, String name, String location, String gusmester, Double price, Integer seats) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.gusmester = gusmester;
+        this.price = price;
+        this.seats = seats;
+    }
+
     public Event(String name, String location, String gusmester, Double price, Integer seats) {
         this.name = name;
         this.location = location;
@@ -65,11 +74,29 @@ public class Event implements Serializable  {
         this.seats = seats;
     }
 
+
+
     public Integer getSeats() {
         return seats;
     }
 
     public void setSeats(Integer seats) {
         this.seats = seats;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getGusmester() {
+        return gusmester;
+    }
+
+    public Double getPrice() {
+        return price;
     }
 }

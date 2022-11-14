@@ -1,9 +1,6 @@
 package facades;
 
-import entities.Booking;
-import entities.Event;
-import entities.Role;
-import entities.User;
+import entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -96,14 +93,15 @@ public class UserFacade {
             Integer seatsInDb = event.getSeats();
             Integer seatsAmount = Integer.parseInt(seats);
 
-
             if (seatsAmount <= seatsInDb) {
                 Integer seatsToRemove = seatsAmount;
                 while (seatsAmount > 0) {
                     seatsAmount--;
                     Booking booking = new Booking(user, event);
                     em.persist(booking);
+
                 }
+
                 event.setSeats(seatsInDb - seatsToRemove);
                 em.merge(event);
                 em.getTransaction().commit();

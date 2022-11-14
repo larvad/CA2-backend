@@ -12,15 +12,17 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
+
         <!-- TODO: Add the URL to your own tomcat server. Used to deploy your WAR-file -->
         <!-- IMPORTANT-1: If your server uses https (via NGINX) use your DOMAIN NAME and https below: -->
-        <!-- IMPORTANT-2: Observe we are NOT using /manager/html but /manager/text for script uploads --> 
-	<remote.server>https://mrbornholm.dk/tomcat/manager/text</remote.server>
+        <!-- IMPORTANT-2: Observe we are NOT using /manager/html but /manager/text for script uploads -->
+        <remote.server>https://mrbornholm.dk/tomcat/manager/text</remote.server>
 
         <!-- TODO: Add your own database name -->
         <!-- IMPORTANT-1: The database should exist on your droplet -->
         <db.name>startcode</db.name>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
     
     <dependencies>
