@@ -1,12 +1,16 @@
 package entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "event")
-public class Event {
+public class Event implements Serializable  {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,6 +32,14 @@ public class Event {
     @ManyToMany
     private List<User> userList = new ArrayList<>();
 
+    @OneToMany(mappedBy="event")
+    private List<Booking> bookings = new ArrayList<>();
+
+
+    public List<Booking> getBookings()  {
+        return bookings;
+    }
+
 
     public Integer getId() {
         return id;
@@ -43,6 +55,15 @@ public class Event {
     }
     public Event(){}
 
+    public Event(Integer id, String name, String location, String gusmester, Double price, Integer seats) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.gusmester = gusmester;
+        this.price = price;
+        this.seats = seats;
+    }
+
     public Event(String name, String location, String gusmester, Double price, Integer seats) {
         this.name = name;
         this.location = location;
@@ -52,5 +73,28 @@ public class Event {
     }
 
 
+    public Integer getSeats() {
+        return seats;
+    }
 
+    public void setSeats(Integer seats) {
+        this.seats = seats;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getGusmester() {
+        return gusmester;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
 }
+
